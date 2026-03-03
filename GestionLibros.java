@@ -69,8 +69,7 @@ public class GestionLibros {
             return;
         }
 
-        if (!nuevoEstado.equalsIgnoreCase("Disponible") &&
-            !nuevoEstado.equalsIgnoreCase("Prestado")) {
+        if (!nuevoEstado.equalsIgnoreCase("Disponible") && !nuevoEstado.equalsIgnoreCase("Prestado")) {
             System.out.println("Estado inválido");
             return;
         }
