@@ -1,4 +1,7 @@
+package GestorDeDatos;
 import java.util.HashMap;
+
+import Entidades.Usuario;
 
 public class GestorUsuario {
 

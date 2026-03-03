@@ -1,3 +1,4 @@
+package Entidades;
 public class Usuario {
 
     private int documento;
