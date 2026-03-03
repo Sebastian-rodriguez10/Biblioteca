@@ -1,3 +1,4 @@
+package Entidades;
 public class Libro {
 
     private String isbn;

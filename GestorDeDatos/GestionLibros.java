@@ -1,6 +1,9 @@
+package GestorDeDatos;
 import java.time.Year;
 import java.util.HashMap;
 import java.util.Map;
+
+import Entidades.Libro;
 
 public class GestionLibros {
 
@@ -11,7 +14,7 @@ public class GestionLibros {
         int añoActual = Year.now().getValue();
 
         if (isbn.isEmpty() || titulo.isEmpty() || autor.isEmpty() || estado.isEmpty()) {
-            System.out.println("Ningun campo puede estar vacio");
+            System.out.println("Ningun campo puede estar vacio"); 
             return;
         }
 
@@ -69,7 +72,8 @@ public class GestionLibros {
             return;
         }
 
-        if (!nuevoEstado.equalsIgnoreCase("Disponible") && !nuevoEstado.equalsIgnoreCase("Prestado")) {
+        if (!nuevoEstado.equalsIgnoreCase("Disponible") && 
+        !nuevoEstado.equalsIgnoreCase("Prestado")) {
             System.out.println("Estado inválido");
             return;
         }
