@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import Entidades.Usuario;
 
 public class GestorUsuario {
-    // Lista donde se guarda los usuarios
+    // Lista donde se guardarán los usuarios
     private ArrayList<Usuario> listaUsuarios;
     public GestorUsuario() {
         listaUsuarios = new ArrayList<>();
@@ -13,7 +13,7 @@ public class GestorUsuario {
     // Método para registrar usuario
     public String registrarUsuario(Usuario usuario) {
         // Que se ingresen todos los campos
-        if (usuario.getDocumento() == 0 || usuario.getNombreCompleto() == null || usuario.getNombreCompleto().isEmpty() || usuario.getTipoUsuario() == null || usuario.getTipoUsuario().isEmpty()) {
+        if (usuario.getDocumento() == 0 ||usuario.getNombreCompleto() == null || usuario.getNombreCompleto().isEmpty() ||usuario.getTipoUsuario() == null || usuario.getTipoUsuario().isEmpty()) {
             return "Todos los campos son obligatorios";
         }
         // Verifica que no haya un documento repetido
@@ -23,9 +23,7 @@ public class GestorUsuario {
             }
         }
         // Valida el tipo de usuario
-        if (!usuario.getTipoUsuario().equalsIgnoreCase("Administrador")
-                && !usuario.getTipoUsuario().equalsIgnoreCase("Bibliotecario")
-                && !usuario.getTipoUsuario().equalsIgnoreCase("Lector")) {
+        if (!usuario.getTipoUsuario().equalsIgnoreCase("Administrador")&& !usuario.getTipoUsuario().equalsIgnoreCase("Bibliotecario")&& !usuario.getTipoUsuario().equalsIgnoreCase("Lector")) {
             return "Tipo de usuario no válido";
         } else {
             // ingresa el usuario a la lista
@@ -37,7 +35,6 @@ public class GestorUsuario {
     public void listarUsuarios() {
         if (listaUsuarios.isEmpty()) {
             System.out.println("No hay usuarios registrados.");
-        } else {
             for (Usuario usuario : listaUsuarios) {
                 System.out.println("Documento: " + usuario.getDocumento());
                 System.out.println("Nombre: " + usuario.getNombreCompleto());
@@ -65,4 +62,5 @@ public class GestorUsuario {
         }
         return "No existe un usuario con ese documento.";
     }
+
 }
