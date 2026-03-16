@@ -12,14 +12,14 @@ public class GestionLibros {
     // Registrar libro
     public void registrarLibro(String isbn, String titulo, String autor, int año, String estado) {
 
-        int anioActual = Year.now().getValue();
+        int añoActual = Year.now().getValue();
 
         if (isbn.isEmpty() || titulo.isEmpty() || autor.isEmpty() || estado.isEmpty()) {
             System.out.println("Ningún campo puede estar vacío.");
             return;
         }
 
-        if (año > anioActual) {
+        if (año > añoActual) {
             System.out.println("El año no puede ser mayor al actual.");
             return;
         }
