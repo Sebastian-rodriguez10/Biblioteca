@@ -1,45 +1,43 @@
 package GestorDeDatos;
+
 import java.time.Year;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
 
 import Entidades.Libro;
 
 public class GestionLibros {
 
-    private Map<String, Libro> libros = new HashMap<>();
+    private ArrayList<Libro> libros = new ArrayList<>();
 
+    // Registrar libro
     public void registrarLibro(String isbn, String titulo, String autor, int año, String estado) {
 
-        int añoActual = Year.now().getValue();
+        int anioActual = Year.now().getValue();
 
         if (isbn.isEmpty() || titulo.isEmpty() || autor.isEmpty() || estado.isEmpty()) {
-            System.out.println("Ningun campo puede estar vacio"); 
+            System.out.println("Ningún campo puede estar vacío.");
             return;
         }
 
-        if (año > añoActual) {
-            System.out.println("El año no puede ser mayor al actual");
+        if (año > anioActual) {
+            System.out.println("El año no puede ser mayor al actual.");
             return;
         }
 
-        if (libros.containsKey(isbn)) {
-            System.out.println("El ISBN ya está registrado");
-            return;
-        }
-
-        if (!estado.equalsIgnoreCase("Disponible") &&
-            !estado.equalsIgnoreCase("Prestado")) {
-            System.out.println("Estado invalido");
-            return;
+        for (Libro l : libros) {
+            if (l.getIsbn().equals(isbn)) {
+                System.out.println("Error: El ISBN ya existe.");
+                return;
+            }
         }
 
         Libro libro = new Libro(isbn, titulo, autor, año, estado);
-        libros.put(isbn, libro);
+        libros.add(libro);
 
-        System.out.println("Libro registrado correctamente");
+        System.out.println("Libro registrado correctamente.");
     }
 
+    // Listar libros
     public void listarLibros() {
 
         if (libros.isEmpty()) {
@@ -47,47 +45,54 @@ public class GestionLibros {
             return;
         }
 
-        for (Libro libro : libros.values()) {
+        for (Libro libro : libros) {
             System.out.println(libro);
         }
     }
 
+    // Buscar libro por ISBN
     public void buscarLibro(String isbn) {
 
-        Libro libro = libros.get(isbn);
+        for (Libro libro : libros) {
 
-        if (libro != null) {
-            System.out.println(libro);
-        } else {
-            System.out.println("Libro no encontrado.");
+            if (libro.getIsbn().equals(isbn)) {
+                System.out.println(libro);
+                return;
+            }
         }
+
+        System.out.println("Libro no encontrado.");
     }
 
-    public void actualizarEstado(String isbn, String nuevoEstado) {
+    // Actualizar disponibilidad
+    public void actualizarEstado(String isbn, String estadoNuevo) {
 
-        Libro libro = libros.get(isbn);
+        for (Libro libro : libros) {
 
-        if (libro == null) {
-            System.out.println("Libro no encontrado");
-            return;
+            if (libro.getIsbn().equals(isbn)) {
+
+                libro.setEstado(estadoNuevo);
+                System.out.println("Estado actualizado correctamente.");
+                return;
+            }
         }
 
-        if (!nuevoEstado.equalsIgnoreCase("Disponible") && 
-        !nuevoEstado.equalsIgnoreCase("Prestado")) {
-            System.out.println("Estado inválido");
-            return;
-        }
-
-        libro.setEstado(nuevoEstado);
-        System.out.println("Estado actualizado correctamente.");
+        System.out.println("Libro no encontrado.");
     }
 
+    // Eliminar libro
     public void eliminarLibro(String isbn) {
 
-        if (libros.remove(isbn) != null) {
-            System.out.println("Libro eliminado correctamente");
-        } else {
-            System.out.println("Libro no encontrado");
+        for (Libro libro : libros) {
+
+            if (libro.getIsbn().equals(isbn)) {
+
+                libros.remove(libro);
+                System.out.println("Libro eliminado correctamente.");
+                return;
+            }
         }
+
+        System.out.println("Libro no encontrado.");
     }
 }

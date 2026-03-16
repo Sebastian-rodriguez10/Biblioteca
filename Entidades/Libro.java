@@ -39,7 +39,7 @@ public class Libro {
         this.estado = estado;
     }
 
-     
+      
     @Override
     public String toString() {
         return "\nISBN: " + isbn + "\nTítulo: " + titulo + "\nAutor: " + autor + "\nAño de Publicación: " + añoPublicacion + "\nEstado: " + estado;
