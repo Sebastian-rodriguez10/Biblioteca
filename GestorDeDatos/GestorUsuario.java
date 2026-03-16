@@ -1,4 +1,5 @@
 package GestorDeDatos;
+
 import java.util.HashMap;
 
 import Entidades.Usuario;
@@ -13,23 +14,61 @@ public class GestorUsuario {
 
     // Método para registrar usuario
     public String registrarUsuario(Usuario usuario) {
-    // Que se ingresr todos los campos
+        // Que se ingresr todos los campos
         if (usuario.getDocumento() == 0 ||
-            usuario.getNombreCompleto() == null || usuario.getNombreCompleto().isEmpty() ||
-            usuario.getTipoUsuario() == null || usuario.getTipoUsuario().isEmpty()) {
+                usuario.getNombreCompleto() == null || usuario.getNombreCompleto().isEmpty() ||
+                usuario.getTipoUsuario() == null || usuario.getTipoUsuario().isEmpty()) {
 
             return "Todos los campos son obligatorios";
         } // Verifica que no haya un documento repetido
         else if (usuariosMap.containsKey(usuario.getDocumento())) {
             return "Ya existe un usuario con ese documento";
-        }// Valida el tipo de usuario
-        else if (!usuario.getTipoUsuario().equalsIgnoreCase("Administrador") &&!usuario.getTipoUsuario().equalsIgnoreCase("Bibliotecario") &&!usuario.getTipoUsuario().equalsIgnoreCase("Lector")) {
+        } // Valida el tipo de usuario
+        else if (!usuario.getTipoUsuario().equalsIgnoreCase("Administrador")
+                && !usuario.getTipoUsuario().equalsIgnoreCase("Bibliotecario")
+                && !usuario.getTipoUsuario().equalsIgnoreCase("Lector")) {
             return "Tipo de usuario no válido";
 
         } else {
-                //ingresa el usuacrio
+            // ingresa el usuacrio
             usuariosMap.put(usuario.getDocumento(), usuario);
             return "Usuario registrado correctamente.";
         }
     }
+
+    // mostarar la lista
+    public void listarUsuarios() {
+
+        if (usuariosMap.isEmpty()) {
+            System.out.println("No hay usuarios registrados.");
+        } else {
+
+            for (Usuario usuario : usuariosMap.values()) {
+                System.out.println("Documento: " + usuario.getDocumento());
+                System.out.println("Nombre: " + usuario.getNombreCompleto());
+                System.out.println("Tipo: " + usuario.getTipoUsuario());
+                System.out.println("-----------------------------");
+            }
+        }
+    }
+
+    // Buscar
+    public Usuario buscarUsuario(int documento) {
+        if (usuariosMap.containsKey(documento)) {
+            return usuariosMap.get(documento);
+        } else {
+            return null;
+        }
+    }
+
+    // Eliminar
+    public String eliminarUsuario(int documento) {
+        if (usuariosMap.containsKey(documento)) {
+            usuariosMap.remove(documento);
+            return "Usuario eliminado correctamente.";
+        } else {
+            return "No existe un usuario con ese documento.";
+        }
+    }
+
 }
