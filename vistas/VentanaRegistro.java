@@ -95,7 +95,8 @@ public class VentanaRegistro extends JFrame implements ActionListener{
 		if(e.getSource() == btnRegistrar) {
 			//registrar();
 		} else if(e.getSource() == btnCancelar) {
-			//cancelar();
+			mCoordinador.mostrarLogin();
+    		this.setVisible(false);
 		}
 		
 	}

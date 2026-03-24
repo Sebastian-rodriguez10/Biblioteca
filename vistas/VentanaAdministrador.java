@@ -17,6 +17,8 @@ public class VentanaAdministrador extends JFrame implements ActionListener {
     private JButton btnEliminarUsuario;
     private JButton btnAgregarLibro;
     private JButton btnEliminarLibro;
+    private JButton btnVolver;
+
 
     private GestorUsuario gestorUsuario;
     private GestionLibros gestionLibros;
@@ -64,6 +66,11 @@ public class VentanaAdministrador extends JFrame implements ActionListener {
         btnEliminarLibro.setBounds(50, 150, 280, 30);
         btnEliminarLibro.addActionListener(this);
         contentPane.add(btnEliminarLibro);
+
+        btnVolver = new JButton("Cerrar sesión");
+        btnVolver.setBounds(35, 200, 310, 30);
+        btnVolver.addActionListener(this);
+        contentPane.add(btnVolver);
     }
 
     @Override
@@ -96,6 +103,9 @@ public class VentanaAdministrador extends JFrame implements ActionListener {
 
             String isbn = JOptionPane.showInputDialog("ISBN:");
             gestionLibros.eliminarLibro(isbn);
+        } else if (e.getSource() == btnVolver) {
+            mCoordinador.mostrarLogin();
+            this.setVisible(false);
         }
     }
 

@@ -17,11 +17,11 @@ public class VentanaBibliotecario extends JFrame implements ActionListener {
     private JButton btnEliminarUsuario;
     private JButton btnAgregarLibro;
     private JButton btnEliminarLibro;
+    private JButton btnVolver;
 
     private GestorUsuario gestorUsuario;
     private GestionLibros gestionLibros;
     private Coordinador mCoordinador;
-
 
     public VentanaBibliotecario(GestorUsuario gu, GestionLibros gl) {
 
@@ -32,7 +32,7 @@ public class VentanaBibliotecario extends JFrame implements ActionListener {
         setBounds(100, 100, 400, 300);
 
         contentPane = new JPanel();
-        contentPane.setBorder(new EmptyBorder(5,5,5,5));
+        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(null);
         setLocationRelativeTo(null);
@@ -61,6 +61,12 @@ public class VentanaBibliotecario extends JFrame implements ActionListener {
         btnEliminarLibro.setBounds(50, 150, 280, 30);
         btnEliminarLibro.addActionListener(this);
         contentPane.add(btnEliminarLibro);
+
+        btnVolver = new JButton("Cerrar sesión");
+        btnVolver.setBounds(35, 200, 310, 30);
+        btnVolver.addActionListener(this);
+        contentPane.add(btnVolver);
+
     }
 
     @Override
@@ -92,10 +98,14 @@ public class VentanaBibliotecario extends JFrame implements ActionListener {
 
             String isbn = JOptionPane.showInputDialog("ISBN:");
             gestionLibros.eliminarLibro(isbn);
+        } else if (e.getSource() == btnVolver) {
+            mCoordinador.mostrarLogin();
+            this.setVisible(false);
         }
+
     }
 
-    public void setCoordinador(Coordinador mCoordinador){
+    public void setCoordinador(Coordinador mCoordinador) {
         this.mCoordinador = mCoordinador;
     }
 }

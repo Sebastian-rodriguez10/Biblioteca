@@ -18,9 +18,10 @@ public class VentanaUsuario extends JFrame implements ActionListener {
     private JTextField txtBuscar;
     private JButton btnVerLibros;
     private JButton btnBuscar;
+    private JButton btnVolver;
 
     private GestionLibros gestionLibros;
-    private Coordinador coordinador;
+    private Coordinador mCoordinador;
 
     public VentanaUsuario(String nombre, GestionLibros gestionLibros) {
         this.gestionLibros = gestionLibros;
@@ -28,7 +29,7 @@ public class VentanaUsuario extends JFrame implements ActionListener {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 500, 400);
         contentPane = new JPanel();
-        contentPane.setBorder(new EmptyBorder(5,5,5,5));
+        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(null);
         setLocationRelativeTo(null);
@@ -60,6 +61,11 @@ public class VentanaUsuario extends JFrame implements ActionListener {
         btnBuscar.setBounds(340, 270, 120, 30);
         btnBuscar.addActionListener(this);
         contentPane.add(btnBuscar);
+
+        btnVolver = new JButton("Cerrar sesión");
+        btnVolver.setBounds(185, 310, 150, 30);
+        btnVolver.addActionListener(this);
+        contentPane.add(btnVolver);
     }
 
     @Override
@@ -84,9 +90,13 @@ public class VentanaUsuario extends JFrame implements ActionListener {
             }
 
             areaLibros.setText("Libro no encontrado");
+        } else if (e.getSource() == btnVolver) {
+            mCoordinador.mostrarLogin();
+            this.setVisible(false);
         }
     }
-   public void setCoordinador(Coordinador mCoordinador){
-        this.coordinador = mCoordinador;
+
+    public void setCoordinador(Coordinador mCoordinador) {
+        this.mCoordinador = mCoordinador;
     }
 }
