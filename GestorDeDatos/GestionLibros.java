@@ -4,10 +4,18 @@ import java.time.Year;
 import java.util.ArrayList;
 
 import Entidades.Libro;
+import Logica.Coordinador;
 
 public class GestionLibros {
 
     private ArrayList<Libro> libros = new ArrayList<>();
+    private Coordinador mCoordinador;
+
+
+    // get
+    public ArrayList<Libro> getLibros() {
+    return libros;
+}
 
     // Registrar libro
     public void registrarLibro(String isbn, String titulo, String autor, int año, String estado) {
@@ -94,5 +102,9 @@ public class GestionLibros {
         }
 
         System.out.println("Libro no encontrado.");
+    }
+
+    public void setCoordinador(Coordinador mCoordinador){
+        this.mCoordinador = mCoordinador;
     }
 }

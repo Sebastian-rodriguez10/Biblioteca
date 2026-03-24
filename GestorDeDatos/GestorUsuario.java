@@ -3,10 +3,12 @@ package GestorDeDatos;
 import java.util.ArrayList;
 
 import Entidades.Usuario;
+import Logica.Coordinador;
 
 public class GestorUsuario {
     // Lista donde se guardarán los usuarios
     private ArrayList<Usuario> listaUsuarios;
+    private Coordinador mCoordinador;
     public GestorUsuario() {
         listaUsuarios = new ArrayList<>();
     }
@@ -62,5 +64,9 @@ public class GestorUsuario {
         }
         return "No existe un usuario con ese documento.";
     }
+    public void setCoordinador(Coordinador mCoordinador){
+        this.mCoordinador = mCoordinador;
+    }
+
 
 }
