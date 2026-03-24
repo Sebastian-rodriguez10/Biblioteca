@@ -1,10 +1,13 @@
-package Vistas;
+package vistas;
 
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import Logica.Coordinador;
+
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -27,6 +30,7 @@ public class VentanaRegistro extends JFrame implements ActionListener{
 	private JLabel lblContraseña;
 	private JButton btnRegistrar;
 	private JButton btnCancelar;
+    private Coordinador mCoordinador;
 
 	public VentanaRegistro() {
 		setTitle("Ventana de registro");
@@ -89,12 +93,15 @@ public class VentanaRegistro extends JFrame implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == btnRegistrar) {
-			registrar();
+			//registrar();
 		} else if(e.getSource() == btnCancelar) {
-			cancelar();
+			//cancelar();
 		}
 		
 	}
 	
+    public void setCoordinador(Coordinador mCoordinador) {
+        this.mCoordinador = mCoordinador;
+    }
 	
 }

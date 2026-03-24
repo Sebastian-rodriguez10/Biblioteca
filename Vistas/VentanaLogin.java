@@ -1,10 +1,13 @@
-package Vistas;
+package vistas;
 
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import Logica.Coordinador;
+
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -28,6 +31,7 @@ public class VentanaLogin extends JFrame implements ActionListener {
 	private JLabel lblContraseña;
 	private JButton btnSesion;
 	private JButton btnRegistro;
+    private Coordinador mCoordinador;
 
 	
 	public VentanaLogin() {
@@ -84,12 +88,28 @@ public class VentanaLogin extends JFrame implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource() == btnSesion) {
-			iniciarSesion();
-		} else if(e.getSource() == btnRegistro) {
-			registrar();
-		}
-		
-	}	
-	
+		if (e.getSource() == btnSesion) {
+
+    String rol = comboBox.getSelectedItem().toString();
+
+    if (rol.equals("Administrador")) {
+        mCoordinador.mostrarAdministrador();
+
+    } else if (rol.equals("Bibliotecario")) {
+        mCoordinador.mostrarBibliotecario();
+
+    } else if (rol.equals("Lector")) {
+        mCoordinador.mostrarUsuario();
+    }
+
+} else if (e.getSource() == btnRegistro) {
+
+    mCoordinador.mostrarRegistro();
 }
+	}
+
+    public void setCoordinador(Coordinador mCoordinador){
+        this.mCoordinador = mCoordinador;
+    }
+}
+
