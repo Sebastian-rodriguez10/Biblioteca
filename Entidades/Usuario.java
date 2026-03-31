@@ -45,13 +45,13 @@ public class Usuario {
     }
     //Nuevo métodos:
     public boolean incrementarPrestamos() {
-        this.numPrestamos = this.numPrestamos + 1;
-        boolean aviso = false;
-        if(this.numPrestamos > this.limPrestamos) {
-            System.out.println("\nEl usuario " + getNombreCompleto() + " ya tiene prestados 3 libros.");
-            aviso = true; //Cuando este dato boolean tiene como valor 'true', significa que el usuario ya tiene 3 prestamos. 
-        }
-        return aviso;
+    if (this.numPrestamos >= this.limPrestamos) {
+        System.out.println("\nEl usuario " + getNombreCompleto() + " ya tiene el máximo de préstamos.");
+        return true; // ya llegó al límite
     }
+
+    this.numPrestamos++;
+    return false; // préstamo realizado correctamente
+}
 
 }
