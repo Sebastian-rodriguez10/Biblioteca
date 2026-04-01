@@ -40,7 +40,7 @@ public class GestorPrestamos {
     }
 
     // Registrar devolución:
-    public void registrarDevolucion(int documento) {
+    public void registrarDevolucion(String documento) {
         int acumulador = 0;
         boolean valor = false;
         do {

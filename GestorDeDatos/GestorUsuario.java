@@ -15,7 +15,7 @@ public class GestorUsuario {
     // Método para registrar usuario
     public String registrarUsuario(Usuario usuario) {
         // Que se ingresen todos los campos
-        if (usuario.getDocumento() == 0 ||usuario.getNombreCompleto() == null || usuario.getNombreCompleto().isEmpty() ||usuario.getTipoUsuario() == null || usuario.getTipoUsuario().isEmpty()) {
+        if (usuario.getDocumento() == null ||usuario.getNombreCompleto() == null || usuario.getNombreCompleto().isEmpty() ||usuario.getTipoUsuario() == null || usuario.getTipoUsuario().isEmpty()) {
             return "Todos los campos son obligatorios";
         }
         // Verifica que no haya un documento repetido
@@ -46,7 +46,7 @@ public class GestorUsuario {
         }
     }
     // Buscar
-    public Usuario buscarUsuario(int documento) {
+    public Usuario buscarUsuario(String documento) {
         for (Usuario usuario : listaUsuarios) {
             if (usuario.getDocumento() == documento) {
                 return usuario;
@@ -55,7 +55,7 @@ public class GestorUsuario {
         return null;
     }
     // Eliminar
-    public String eliminarUsuario(int documento) {
+    public String eliminarUsuario(String documento) {
         for (Usuario usuario : listaUsuarios) {
             if (usuario.getDocumento() == documento) {
                 listaUsuarios.remove(usuario);

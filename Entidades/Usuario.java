@@ -1,20 +1,20 @@
 package Entidades;
 public class Usuario {
 
-    private int documento;
+    private String documento;
     private String nombreCompleto;
     private String tipoUsuario;
 
     public Usuario(){
     }
 
-    public Usuario(int documento, String nombreCompleto, String tipoUsuario){
+    public Usuario(String documento, String nombreCompleto, String tipoUsuario){
         this.documento=documento;
         this.nombreCompleto=nombreCompleto;
         this.tipoUsuario= tipoUsuario;
     }
     //Set 
-    public void setDocumento(int documento) {
+    public void setDocumento(String documento) {
         this.documento = documento;
     }
     public void setNombreCompleto(String nombreCompleto) {
@@ -24,7 +24,7 @@ public class Usuario {
         this.tipoUsuario = tipoUsuario;
     }
     //get
-    public int getDocumento() {
+    public String getDocumento() {
         return documento;
     }
     public String getNombreCompleto() {

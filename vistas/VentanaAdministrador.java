@@ -82,13 +82,13 @@ public class VentanaAdministrador extends JFrame implements ActionListener {
             String nombre = JOptionPane.showInputDialog("Nombre:");
             String tipo = JOptionPane.showInputDialog("Tipo:");
 
-            Usuario u = new Usuario(Integer.parseInt(doc), nombre, tipo);
+            Usuario u = new Usuario(doc, nombre, tipo);
             JOptionPane.showMessageDialog(this, gestorUsuario.registrarUsuario(u));
 
         } else if (e.getSource() == btnEliminarUsuario) {
 
             String doc = JOptionPane.showInputDialog("Documento:");
-            JOptionPane.showMessageDialog(this, gestorUsuario.eliminarUsuario(Integer.parseInt(doc)));
+            JOptionPane.showMessageDialog(this, gestorUsuario.eliminarUsuario(doc));
 
         } else if (e.getSource() == btnAgregarLibro) {
 

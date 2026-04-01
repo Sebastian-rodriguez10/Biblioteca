@@ -77,13 +77,13 @@ public class VentanaBibliotecario extends JFrame implements ActionListener {
             String doc = JOptionPane.showInputDialog("Documento:");
             String nombre = JOptionPane.showInputDialog("Nombre:");
 
-            Usuario u = new Usuario(Integer.parseInt(doc), nombre, "Lector");
+            Usuario u = new Usuario(doc, nombre, "Lector");
             JOptionPane.showMessageDialog(this, gestorUsuario.registrarUsuario(u));
 
         } else if (e.getSource() == btnEliminarUsuario) {
 
             String doc = JOptionPane.showInputDialog("Documento:");
-            JOptionPane.showMessageDialog(this, gestorUsuario.eliminarUsuario(Integer.parseInt(doc)));
+            JOptionPane.showMessageDialog(this, gestorUsuario.eliminarUsuario(doc));
 
         } else if (e.getSource() == btnAgregarLibro) {
 
