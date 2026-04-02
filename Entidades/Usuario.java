@@ -4,6 +4,8 @@ public class Usuario {
     private String documento;
     private String nombreCompleto;
     private String tipoUsuario;
+    private int numPrestamos;
+    private int limPrestamos;
 
     public Usuario(){
     }
@@ -12,6 +14,8 @@ public class Usuario {
         this.documento=documento;
         this.nombreCompleto=nombreCompleto;
         this.tipoUsuario= tipoUsuario;
+        this.numPrestamos = 0;
+        this.limPrestamos = 3;
     }
     //Set 
     public void setDocumento(String documento) {
@@ -33,4 +37,21 @@ public class Usuario {
     public String getTipoUsuario() {
         return tipoUsuario;
     }
+    public int getNumPrestamos() {
+        return numPrestamos;
+    }
+    public int getLimPrestamos() {
+        return limPrestamos;
+    }
+    //Nuevo métodos:
+    public boolean incrementarPrestamos() {
+    if (this.numPrestamos >= this.limPrestamos) {
+        System.out.println("\nEl usuario " + getNombreCompleto() + " ya tiene el máximo de préstamos.");
+        return true; // ya llegó al límite
+    }
+
+    this.numPrestamos++;
+    return false; // préstamo realizado correctamente
+}
+
 }

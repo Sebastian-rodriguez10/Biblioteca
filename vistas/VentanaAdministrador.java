@@ -18,26 +18,24 @@ public class VentanaAdministrador extends JFrame implements ActionListener {
     private JButton btnAgregarLibro;
     private JButton btnEliminarLibro;
     private JButton btnVolver;
-
+    private JButton btnPrestamos;
 
     private GestorUsuario gestorUsuario;
     private GestionLibros gestionLibros;
     private Coordinador mCoordinador;
 
     // public VentanaAdministrador(){
-        
+
     // }
 
     public VentanaAdministrador(GestorUsuario gu, GestionLibros gl) {
 
         this.gestorUsuario = gu;
         this.gestionLibros = gl;
-
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 400, 300);
-
         contentPane = new JPanel();
-        contentPane.setBorder(new EmptyBorder(5,5,5,5));
+        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(null);
         setLocationRelativeTo(null);
@@ -68,9 +66,15 @@ public class VentanaAdministrador extends JFrame implements ActionListener {
         contentPane.add(btnEliminarLibro);
 
         btnVolver = new JButton("Cerrar sesión");
-        btnVolver.setBounds(35, 200, 310, 30);
+        btnVolver.setBounds(35, 230, 310, 30);
         btnVolver.addActionListener(this);
         contentPane.add(btnVolver);
+
+        btnPrestamos = new JButton("Gestión de Préstamos");
+        btnPrestamos.setBounds(50, 190, 280, 30);
+        btnPrestamos.addActionListener(this);
+        contentPane.add(btnPrestamos);
+
     }
 
     @Override
@@ -106,11 +110,13 @@ public class VentanaAdministrador extends JFrame implements ActionListener {
         } else if (e.getSource() == btnVolver) {
             mCoordinador.mostrarLogin();
             this.setVisible(false);
+        } else if (e.getSource() == btnPrestamos) {
+            mCoordinador.mostrarPrestamosDesdeAdmin();
         }
+
     }
 
-    public void setCoordinador(Coordinador mCoordinador){
+    public void setCoordinador(Coordinador mCoordinador) {
         this.mCoordinador = mCoordinador;
     }
 }
-

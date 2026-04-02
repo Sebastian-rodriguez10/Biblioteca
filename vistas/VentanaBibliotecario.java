@@ -18,6 +18,7 @@ public class VentanaBibliotecario extends JFrame implements ActionListener {
     private JButton btnAgregarLibro;
     private JButton btnEliminarLibro;
     private JButton btnVolver;
+    private JButton btnPrestamos;
 
     private GestorUsuario gestorUsuario;
     private GestionLibros gestionLibros;
@@ -63,10 +64,14 @@ public class VentanaBibliotecario extends JFrame implements ActionListener {
         contentPane.add(btnEliminarLibro);
 
         btnVolver = new JButton("Cerrar sesión");
-        btnVolver.setBounds(35, 200, 310, 30);
+        btnVolver.setBounds(35, 230, 310, 30);
         btnVolver.addActionListener(this);
         contentPane.add(btnVolver);
 
+        btnPrestamos = new JButton("Gestión de Préstamos");
+        btnPrestamos.setBounds(50, 190, 280, 30);
+        btnPrestamos.addActionListener(this);
+        contentPane.add(btnPrestamos);
     }
 
     @Override
@@ -101,6 +106,8 @@ public class VentanaBibliotecario extends JFrame implements ActionListener {
         } else if (e.getSource() == btnVolver) {
             mCoordinador.mostrarLogin();
             this.setVisible(false);
+        } else if (e.getSource() == btnPrestamos) {
+            mCoordinador.mostrarPrestamosDesdeBiblio();
         }
 
     }

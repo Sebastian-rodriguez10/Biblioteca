@@ -3,11 +3,7 @@ package Logica;
 import GestorDeDatos.GestionLibros;
 import GestorDeDatos.GestorPrestamos;
 import GestorDeDatos.GestorUsuario;
-import vistas.VentanaAdministrador;
-import vistas.VentanaBibliotecario;
-import vistas.VentanaLogin;
-import vistas.VentanaRegistro;
-import vistas.VentanaUsuario;
+import vistas.*;
 
 public class Coordinador {
     private VentanaAdministrador mVentanaAdministrador;
@@ -18,6 +14,8 @@ public class Coordinador {
     private GestionLibros mGestionLibros;
     private GestorPrestamos mGestorPrestamos;
     private GestorUsuario mGestorUsuario;
+    private VentanaPrestamos mVentanaPrestamos;
+
 
     public void setVentanaRegistro(VentanaRegistro mVentanaRegistro) {
         this.mVentanaRegistro = mVentanaRegistro;
@@ -50,6 +48,10 @@ public class Coordinador {
     public void setGestorsuario(GestorUsuario mGestorUsuario) {
         this.mGestorUsuario = mGestorUsuario;
     }
+    public void setVentanaPrestamos(VentanaPrestamos vp) {
+    this.mVentanaPrestamos = vp;
+    }
+
     // ================= VISTAS =================
 
 public void mostrarLogin() {
@@ -75,6 +77,24 @@ public void mostrarUsuario() {
     mVentanaUsuario.setVisible(true);
     mLogin.setVisible(false);
 }
+public void mostrarVentanaPrestamos() {
+    mVentanaPrestamos.setVisible(true);
+    mVentanaAdministrador.setVisible(false);
+    mBibliotecario.setVisible(false);
+}
+public void mostrarPrestamosDesdeAdmin() {
+    mVentanaPrestamos.setOrigen("admin");
+    mVentanaPrestamos.setVisible(true);
+    mVentanaAdministrador.setVisible(false);
+}
+
+public void mostrarPrestamosDesdeBiblio() {
+    mVentanaPrestamos.setOrigen("biblio");
+    mVentanaPrestamos.setVisible(true);
+    mBibliotecario.setVisible(false);
+}
+
+
 
     /// motodos para hacer lo que tengas que hacer 
 

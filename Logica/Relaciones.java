@@ -3,17 +3,14 @@ package Logica;
 import GestorDeDatos.GestionLibros;
 import GestorDeDatos.GestorPrestamos;
 import GestorDeDatos.GestorUsuario;
-import vistas.VentanaAdministrador;
-import vistas.VentanaBibliotecario;
-import vistas.VentanaLogin;
-import vistas.VentanaRegistro;
-import vistas.VentanaUsuario;
+import vistas.*;
+
 
 public class Relaciones {
 
     public Relaciones(){
         String wi = "Dana";
-VentanaRegistro mVentanaRegistro = new VentanaRegistro();
+    VentanaRegistro mVentanaRegistro = new VentanaRegistro();
     VentanaLogin mLogin = new VentanaLogin();
     GestionLibros mGestionLibros = new GestionLibros();
     GestorUsuario mGestorUsuario = new GestorUsuario();
@@ -22,6 +19,7 @@ VentanaRegistro mVentanaRegistro = new VentanaRegistro();
     VentanaAdministrador mVentanaAdministrador = new VentanaAdministrador(mGestorUsuario,mGestionLibros);
     VentanaBibliotecario mBibliotecario = new VentanaBibliotecario(mGestorUsuario,mGestionLibros);
     VentanaUsuario mVentanaUsuario = new VentanaUsuario(wi, mGestionLibros);
+    VentanaPrestamos mVentanaPrestamos = new VentanaPrestamos();
 
     // Relacionando las clases unicas con el coordinador
     mVentanaRegistro.setCoordinador(mCoordinador);
@@ -32,6 +30,8 @@ VentanaRegistro mVentanaRegistro = new VentanaRegistro();
     mGestionLibros.setCoordinador(mCoordinador);
     mGestorUsuario.setCoordinador(mCoordinador);
     mGestorPrestamos.setCoordinador(mCoordinador);
+    mVentanaPrestamos.setCoordinador(mCoordinador);
+    
 
     //Relacionando el coordinador con las clases
     mCoordinador.setVentanaRegistro(mVentanaRegistro);
@@ -42,6 +42,8 @@ VentanaRegistro mVentanaRegistro = new VentanaRegistro();
     mCoordinador.setGestionLibros(mGestionLibros);
     mCoordinador.setGestorsuario(mGestorUsuario);
     mCoordinador.setGestorPrestamo(mGestorPrestamos);
+    mCoordinador.setVentanaPrestamos(mVentanaPrestamos);
+
 
     // metodo para que sea visible la ventana principal
 

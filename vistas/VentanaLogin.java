@@ -31,55 +31,55 @@ public class VentanaLogin extends JFrame implements ActionListener {
 	private JLabel lblContraseña;
 	private JButton btnSesion;
 	private JButton btnRegistro;
-    private Coordinador mCoordinador;
+	private Coordinador mCoordinador;
 
-	
 	public VentanaLogin() {
 		setTitle("Sistema De Biblioteca");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 464, 381);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
 		iniciarComponentes();
 	}
-		
-	public void iniciarComponentes() {		
+
+	public void iniciarComponentes() {
 		lblNewLabel = new JLabel("¡Bienvenido al sistema de la biblioteca municipal!");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 17));
 		lblNewLabel.setBounds(10, 0, 424, 73);
 		contentPane.add(lblNewLabel);
-		
-		comboBox= new JComboBox();
+
+		comboBox = new JComboBox();
 		comboBox.setForeground(new Color(192, 192, 192));
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Seleccione su rol", "Administrador", "Bibliotecario", "Lector"}));
+		comboBox.setModel(new DefaultComboBoxModel(
+				new String[] { "Seleccione su rol", "Administrador", "Bibliotecario", "Lector" }));
 		comboBox.setToolTipText("");
 		comboBox.setBounds(137, 84, 160, 22);
 		contentPane.add(comboBox);
-		
+
 		txtDocumento = new JTextField();
 		txtDocumento.setForeground(new Color(192, 192, 192));
 		txtDocumento.setText("Escriba aquí su usuario");
 		txtDocumento.setBounds(137, 127, 160, 20);
 		contentPane.add(txtDocumento);
 		txtDocumento.setColumns(50);
-		
+
 		passwordField = new JPasswordField();
 		passwordField.setToolTipText("");
 		passwordField.setBounds(137, 188, 160, 20);
 		contentPane.add(passwordField);
-		
+
 		lblContraseña = new JLabel("Contraseña:");
 		lblContraseña.setBounds(137, 173, 60, 14);
 		contentPane.add(lblContraseña);
-		
+
 		btnSesion = new JButton("Iniciar sesión");
 		btnSesion.setBounds(91, 248, 106, 33);
 		contentPane.add(btnSesion);
 		btnSesion.addActionListener(this);
-		
+
 		btnRegistro = new JButton("Resgitrarse");
 		btnRegistro.setBounds(245, 246, 106, 36);
 		contentPane.add(btnRegistro);
@@ -90,26 +90,24 @@ public class VentanaLogin extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnSesion) {
 
-    String rol = comboBox.getSelectedItem().toString();
+			String rol = comboBox.getSelectedItem().toString();
+			if (rol.equals("Administrador")) {
+				mCoordinador.mostrarAdministrador();
 
-    if (rol.equals("Administrador")) {
-        mCoordinador.mostrarAdministrador();
+			} else if (rol.equals("Bibliotecario")) {
+				mCoordinador.mostrarBibliotecario();
 
-    } else if (rol.equals("Bibliotecario")) {
-        mCoordinador.mostrarBibliotecario();
+			} else if (rol.equals("Lector")) {
+				mCoordinador.mostrarUsuario();
+			}
 
-    } else if (rol.equals("Lector")) {
-        mCoordinador.mostrarUsuario();
-    }
+		} else if (e.getSource() == btnRegistro) {
 
-} else if (e.getSource() == btnRegistro) {
-
-    mCoordinador.mostrarRegistro();
-}
+			mCoordinador.mostrarRegistro();
+		}
 	}
 
-    public void setCoordinador(Coordinador mCoordinador){
-        this.mCoordinador = mCoordinador;
-    }
+	public void setCoordinador(Coordinador mCoordinador) {
+		this.mCoordinador = mCoordinador;
+	}
 }
-

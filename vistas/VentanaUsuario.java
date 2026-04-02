@@ -25,7 +25,6 @@ public class VentanaUsuario extends JFrame implements ActionListener {
 
     public VentanaUsuario(String nombre, GestionLibros gestionLibros) {
         this.gestionLibros = gestionLibros;
-
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 500, 400);
         contentPane = new JPanel();
