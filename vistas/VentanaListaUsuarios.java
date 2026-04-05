@@ -16,6 +16,7 @@ public class VentanaListaUsuarios extends JFrame implements ActionListener {
     private JButton btnMostrar;
     private JButton btnLimpiar;
     private JButton btnVolver;
+    private String origen;
 
     private Coordinador miCoordinador;
 
@@ -24,7 +25,7 @@ public class VentanaListaUsuarios extends JFrame implements ActionListener {
         setBounds(100, 100, 500, 400);
 
         contentPane = new JPanel();
-        contentPane.setBorder(new EmptyBorder(5,5,5,5));
+        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(null);
         setLocationRelativeTo(null);
@@ -90,8 +91,22 @@ public class VentanaListaUsuarios extends JFrame implements ActionListener {
 
         } else if (e.getSource() == btnVolver) {
             limpiar();
-            miCoordinador.mostrarBibliotecario(); // o la ventana que quieras
+
+            if ("admin".equals(origen)) {
+                miCoordinador.mostrarAdministrador();
+
+            } else if ("biblio".equals(origen)) {
+                miCoordinador.mostrarBibliotecario();
+            } else {
+                JOptionPane.showMessageDialog(this, "Origen no definido");
+            }
+
             this.setVisible(false);
         }
+
+    }
+
+    public void setOrigen(String origen) {
+        this.origen = origen;
     }
 }

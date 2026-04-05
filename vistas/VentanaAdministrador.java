@@ -8,6 +8,7 @@ import Logica.Coordinador;
 import Entidades.Usuario;
 
 import java.awt.event.*;
+import java.util.List;
 
 public class VentanaAdministrador extends JFrame implements ActionListener {
 
@@ -15,6 +16,7 @@ public class VentanaAdministrador extends JFrame implements ActionListener {
 
     private JButton btnAgregarUsuario;
     private JButton btnEliminarUsuario;
+    private JButton btnListarUsuarios; // NUEVO
     private JButton btnAgregarLibro;
     private JButton btnEliminarLibro;
     private JButton btnVolver;
@@ -23,17 +25,14 @@ public class VentanaAdministrador extends JFrame implements ActionListener {
     private GestorUsuario gestorUsuario;
     private GestionLibros gestionLibros;
     private Coordinador mCoordinador;
-
-    // public VentanaAdministrador(){
-
-    // }
+    private VentanaListaUsuarios vListaUsuarios;
 
     public VentanaAdministrador(GestorUsuario gu, GestionLibros gl) {
 
         this.gestorUsuario = gu;
         this.gestionLibros = gl;
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(100, 100, 400, 300);
+        setBounds(100, 100, 450, 380); // AGRANDÉ LA VENTANA
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
@@ -46,35 +45,39 @@ public class VentanaAdministrador extends JFrame implements ActionListener {
     private void iniciarComponentes() {
 
         btnAgregarUsuario = new JButton("Agregar Usuario");
-        btnAgregarUsuario.setBounds(50, 30, 280, 30);
+        btnAgregarUsuario.setBounds(70, 20, 300, 30);
         btnAgregarUsuario.addActionListener(this);
         contentPane.add(btnAgregarUsuario);
 
         btnEliminarUsuario = new JButton("Eliminar Usuario");
-        btnEliminarUsuario.setBounds(50, 70, 280, 30);
+        btnEliminarUsuario.setBounds(70, 60, 300, 30);
         btnEliminarUsuario.addActionListener(this);
         contentPane.add(btnEliminarUsuario);
 
+        btnListarUsuarios = new JButton("Listar Usuarios"); // NUEVO
+        btnListarUsuarios.setBounds(70, 100, 300, 30);
+        btnListarUsuarios.addActionListener(this);
+        contentPane.add(btnListarUsuarios);
+
         btnAgregarLibro = new JButton("Agregar Libro");
-        btnAgregarLibro.setBounds(50, 110, 280, 30);
+        btnAgregarLibro.setBounds(70, 140, 300, 30);
         btnAgregarLibro.addActionListener(this);
         contentPane.add(btnAgregarLibro);
 
         btnEliminarLibro = new JButton("Eliminar Libro");
-        btnEliminarLibro.setBounds(50, 150, 280, 30);
+        btnEliminarLibro.setBounds(70, 180, 300, 30);
         btnEliminarLibro.addActionListener(this);
         contentPane.add(btnEliminarLibro);
 
-        btnVolver = new JButton("Cerrar sesión");
-        btnVolver.setBounds(35, 230, 310, 30);
-        btnVolver.addActionListener(this);
-        contentPane.add(btnVolver);
-
         btnPrestamos = new JButton("Gestión de Préstamos");
-        btnPrestamos.setBounds(50, 190, 280, 30);
+        btnPrestamos.setBounds(70, 220, 300, 30);
         btnPrestamos.addActionListener(this);
         contentPane.add(btnPrestamos);
 
+        btnVolver = new JButton("Cerrar sesión");
+        btnVolver.setBounds(70, 270, 300, 30);
+        btnVolver.addActionListener(this);
+        contentPane.add(btnVolver);
     }
 
     @Override
@@ -94,6 +97,10 @@ public class VentanaAdministrador extends JFrame implements ActionListener {
             String doc = JOptionPane.showInputDialog("Documento:");
             JOptionPane.showMessageDialog(this, gestorUsuario.eliminarUsuario(doc));
 
+        } else if (e.getSource() == btnListarUsuarios) { // NUEVO
+            mCoordinador.mostrarVentanaListaUsuariosDesdeAdmin();
+
+
         } else if (e.getSource() == btnAgregarLibro) {
 
             String isbn = JOptionPane.showInputDialog("ISBN:");
@@ -107,13 +114,16 @@ public class VentanaAdministrador extends JFrame implements ActionListener {
 
             String isbn = JOptionPane.showInputDialog("ISBN:");
             gestionLibros.eliminarLibro(isbn);
+
         } else if (e.getSource() == btnVolver) {
+
             mCoordinador.mostrarLogin();
             this.setVisible(false);
+
         } else if (e.getSource() == btnPrestamos) {
+
             mCoordinador.mostrarPrestamosDesdeAdmin();
         }
-
     }
 
     public void setCoordinador(Coordinador mCoordinador) {

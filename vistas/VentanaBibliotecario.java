@@ -23,6 +23,7 @@ public class VentanaBibliotecario extends JFrame implements ActionListener {
     private GestorUsuario gestorUsuario;
     private GestionLibros gestionLibros;
     private Coordinador mCoordinador;
+    private VentanaListaUsuarios vListaUsuarios;
 
     public VentanaBibliotecario(GestorUsuario gu, GestionLibros gl) {
 
@@ -78,8 +79,7 @@ public class VentanaBibliotecario extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         if (e.getSource() == btnListaUsuarios) {
-
-            mCoordinador.mostrarVentanaListaUsuarios();
+            mCoordinador.mostrarVentanaListaUsuariosDesdeBiblio();
 
         } else if (e.getSource() == btnEliminarUsuario) {
 
@@ -93,16 +93,22 @@ public class VentanaBibliotecario extends JFrame implements ActionListener {
             String autor = JOptionPane.showInputDialog("Autor:");
             int año = 0;
             try {
+               
             // Intentamos convertir el texto a número
             año = Integer.parseInt(JOptionPane.showInputDialog(("Año")));
             System.out.println("¡Es un número válido!: " + año);
+            gestionLibros.registrarLibro(isbn, titulo, autor, año, "Disponible");
         } catch (NumberFormatException e1) {
+             if (isbn.isEmpty() || titulo.isEmpty() || autor.isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios");
+                }else{
+                    System.out.println("Error: Has introducido una letra o un formato no válido.");
+                }
             // Si falla la conversión, entra aquí
-            System.out.println("Error: Has introducido una letra o un formato no válido.");
+            
         }
             
 
-            gestionLibros.registrarLibro(isbn, titulo, autor, año, "Disponible");
 
         } else if (e.getSource() == btnEliminarLibro) {
 
