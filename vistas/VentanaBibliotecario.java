@@ -13,7 +13,7 @@ public class VentanaBibliotecario extends JFrame implements ActionListener {
 
     private JPanel contentPane;
 
-    private JButton btnAgregarUsuario;
+    private JButton btnListaUsuarios;
     private JButton btnEliminarUsuario;
     private JButton btnAgregarLibro;
     private JButton btnEliminarLibro;
@@ -43,10 +43,10 @@ public class VentanaBibliotecario extends JFrame implements ActionListener {
 
     private void iniciarComponentes() {
 
-        btnAgregarUsuario = new JButton("Agregar Usuario (Lector)");
-        btnAgregarUsuario.setBounds(50, 30, 280, 30);
-        btnAgregarUsuario.addActionListener(this);
-        contentPane.add(btnAgregarUsuario);
+        btnListaUsuarios = new JButton("Lista de Usuarios");
+        btnListaUsuarios.setBounds(50, 30, 280, 30);
+        btnListaUsuarios.addActionListener(this);
+        contentPane.add(btnListaUsuarios);
 
         btnEliminarUsuario = new JButton("Eliminar Usuario");
         btnEliminarUsuario.setBounds(50, 70, 280, 30);
@@ -77,13 +77,9 @@ public class VentanaBibliotecario extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        if (e.getSource() == btnAgregarUsuario) {
+        if (e.getSource() == btnListaUsuarios) {
 
-            String doc = JOptionPane.showInputDialog("Documento:");
-            String nombre = JOptionPane.showInputDialog("Nombre:");
-
-            Usuario u = new Usuario(doc, nombre, "Lector");
-            JOptionPane.showMessageDialog(this, gestorUsuario.registrarUsuario(u));
+            mCoordinador.mostrarVentanaListaUsuarios();
 
         } else if (e.getSource() == btnEliminarUsuario) {
 
@@ -95,7 +91,16 @@ public class VentanaBibliotecario extends JFrame implements ActionListener {
             String isbn = JOptionPane.showInputDialog("ISBN:");
             String titulo = JOptionPane.showInputDialog("Título:");
             String autor = JOptionPane.showInputDialog("Autor:");
-            int año = Integer.parseInt(JOptionPane.showInputDialog("Año"));
+            int año = 0;
+            try {
+            // Intentamos convertir el texto a número
+            año = Integer.parseInt(JOptionPane.showInputDialog(("Año")));
+            System.out.println("¡Es un número válido!: " + año);
+        } catch (NumberFormatException e1) {
+            // Si falla la conversión, entra aquí
+            System.out.println("Error: Has introducido una letra o un formato no válido.");
+        }
+            
 
             gestionLibros.registrarLibro(isbn, titulo, autor, año, "Disponible");
 

@@ -3,6 +3,8 @@ package GestorDeDatos;
 import java.time.Year;
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 import Entidades.Libro;
 import Logica.Coordinador;
 
@@ -10,10 +12,18 @@ public class GestionLibros {
 
     private ArrayList<Libro> libros = new ArrayList<>();
     private Coordinador mCoordinador;
+    public GestionLibros(){
+        libros.add(new Libro("CA1","Cien años de soledad", "Gabriel García Márquez", 1967,"diponible"));
+        libros.add(new Libro("A19","1984", "George Orwell", 1949,"No disponible"));
+        libros.add(new Libro("PR1","El Principito", "Antoine de Saint-Exupéry", 1943,"diponible"));
+    }
+    
 
 
     // get
     public ArrayList<Libro> getLibros() {
+         // 2. "Quemar" los datos usando el método add()
+        
     return libros;
 }
 
@@ -22,7 +32,7 @@ public class GestionLibros {
 
         int añoActual = Year.now().getValue();
 
-        if (isbn.isEmpty() || titulo.isEmpty() || autor.isEmpty() || estado.isEmpty()) {
+        if (isbn==""|| titulo==""|| autor=="" || estado=="") {
             System.out.println("Ningún campo puede estar vacío.");
             return;
         }
@@ -35,6 +45,7 @@ public class GestionLibros {
         for (Libro l : libros) {
             if (l.getIsbn().equals(isbn)) {
                 System.out.println("Error: El ISBN ya existe.");
+                JOptionPane.showMessageDialog(null, "Error: El ISBN ya existe.");
                 return;
             }
         }
@@ -43,33 +54,41 @@ public class GestionLibros {
         libros.add(libro);
 
         System.out.println("Libro registrado correctamente.");
+        JOptionPane.showMessageDialog(null, "Libro registrado correctamente.");
     }
 
     // Listar libros
-    public void listarLibros() {
-
+    public ArrayList<Libro> listarLibros() {
+        //ArrayList<Libro> listaLibros=new ArrayList<Libro>();
         if (libros.isEmpty()) {
             System.out.println("No hay libros registrados.");
-            return;
+            JOptionPane.showMessageDialog(null, "No hay libros registrados");
+            return new ArrayList<Libro>();
         }
 
         for (Libro libro : libros) {
             System.out.println(libro);
+            return libros;
         }
+        return libros;
     }
 
     // Buscar libro por ISBN
-    public void buscarLibro(String isbn) {
+    public Libro buscarLibro(String isbn) {
+
+        Libro nuLibro = null;
 
         for (Libro libro : libros) {
 
             if (libro.getIsbn().equals(isbn)) {
                 System.out.println(libro);
-                return;
+                System.out.println("Libro encontrado.");
+                return libro;
             }
         }
+        return nuLibro;
 
-        System.out.println("Libro no encontrado.");
+        //System.out.println("Libro no encontrado.");
     }
 
     // Actualizar disponibilidad

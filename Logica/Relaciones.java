@@ -20,6 +20,7 @@ public class Relaciones {
     VentanaBibliotecario mBibliotecario = new VentanaBibliotecario(mGestorUsuario,mGestionLibros);
     VentanaUsuario mVentanaUsuario = new VentanaUsuario(wi, mGestionLibros);
     VentanaPrestamos mVentanaPrestamos = new VentanaPrestamos();
+    VentanaListaUsuarios mVentanaListaUsuarios = new VentanaListaUsuarios();
 
     // Relacionando las clases unicas con el coordinador
     mVentanaRegistro.setCoordinador(mCoordinador);
@@ -31,6 +32,7 @@ public class Relaciones {
     mGestorUsuario.setCoordinador(mCoordinador);
     mGestorPrestamos.setCoordinador(mCoordinador);
     mVentanaPrestamos.setCoordinador(mCoordinador);
+    mVentanaListaUsuarios.setCoordinador(mCoordinador);
     
 
     //Relacionando el coordinador con las clases
@@ -43,6 +45,7 @@ public class Relaciones {
     mCoordinador.setGestorsuario(mGestorUsuario);
     mCoordinador.setGestorPrestamo(mGestorPrestamos);
     mCoordinador.setVentanaPrestamos(mVentanaPrestamos);
+    mCoordinador.setVentanaListarUsuario(mVentanaListaUsuarios);
 
 
     // metodo para que sea visible la ventana principal

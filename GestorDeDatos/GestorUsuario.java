@@ -2,20 +2,32 @@ package GestorDeDatos;
 
 import java.util.ArrayList;
 
+import Entidades.Libro;
 import Entidades.Usuario;
 import Logica.Coordinador;
 
 public class GestorUsuario {
     // Lista donde se guardarán los usuarios
-    private ArrayList<Usuario> listaUsuarios;
+    private ArrayList<Usuario> listaUsuarios = new ArrayList<>();
     private Coordinador mCoordinador;
+
     public GestorUsuario() {
-        listaUsuarios = new ArrayList<>();
+        listaUsuarios.add(new Usuario("1010", "Carlos Perez", "administrador"));
+        listaUsuarios.add(new Usuario("2020", "Ana Gomez", "bibliotecario"));
+        listaUsuarios.add(new Usuario("3030", "Juan Roa", "usuario"));
     }
+
+    // get
+    public ArrayList<Usuario>  getUsuarios() {
+    return listaUsuarios;
+}
+
     // Método para registrar usuario
     public String registrarUsuario(Usuario usuario) {
         // Que se ingresen todos los campos
-        if (usuario.getDocumento() == null ||usuario.getNombreCompleto() == null || usuario.getNombreCompleto().isEmpty() ||usuario.getTipoUsuario() == null || usuario.getTipoUsuario().isEmpty()) {
+        if (usuario.getDocumento() == null || usuario.getNombreCompleto() == null
+                || usuario.getNombreCompleto().isEmpty() || usuario.getTipoUsuario() == null
+                || usuario.getTipoUsuario().isEmpty()) {
             return "Todos los campos son obligatorios";
         }
         // Verifica que no haya un documento repetido
@@ -25,7 +37,9 @@ public class GestorUsuario {
             }
         }
         // Valida el tipo de usuario
-        if (!usuario.getTipoUsuario().equalsIgnoreCase("Administrador")&& !usuario.getTipoUsuario().equalsIgnoreCase("Bibliotecario")&& !usuario.getTipoUsuario().equalsIgnoreCase("Lector")) {
+        if (!usuario.getTipoUsuario().equalsIgnoreCase("Administrador")
+                && !usuario.getTipoUsuario().equalsIgnoreCase("Bibliotecario")
+                && !usuario.getTipoUsuario().equalsIgnoreCase("Lector")) {
             return "Tipo de usuario no válido";
         } else {
             // ingresa el usuario a la lista
@@ -33,8 +47,10 @@ public class GestorUsuario {
             return "Usuario registrado correctamente.";
         }
     }
+
     // mostrar la lista
-    public void listarUsuarios() {
+    public ArrayList<Usuario> listarUsuarios() {
+
         if (listaUsuarios.isEmpty()) {
             System.out.println("No hay usuarios registrados.");
             for (Usuario usuario : listaUsuarios) {
@@ -44,7 +60,9 @@ public class GestorUsuario {
                 System.out.println("-----------------------------");
             }
         }
+        return listaUsuarios;
     }
+
     // Buscar
     public Usuario buscarUsuario(String documento) {
         for (Usuario usuario : listaUsuarios) {
@@ -54,6 +72,7 @@ public class GestorUsuario {
         }
         return null;
     }
+
     // Eliminar
     public String eliminarUsuario(String documento) {
         for (Usuario usuario : listaUsuarios) {
@@ -64,9 +83,9 @@ public class GestorUsuario {
         }
         return "No existe un usuario con ese documento.";
     }
-    public void setCoordinador(Coordinador mCoordinador){
+
+    public void setCoordinador(Coordinador mCoordinador) {
         this.mCoordinador = mCoordinador;
     }
-
 
 }

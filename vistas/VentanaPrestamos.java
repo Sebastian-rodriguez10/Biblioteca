@@ -4,6 +4,7 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
 import Entidades.Libro;
+import Entidades.Usuario;
 import GestorDeDatos.GestionLibros;
 import GestorDeDatos.GestorPrestamos;
 import Logica.Coordinador;
@@ -123,26 +124,31 @@ public class VentanaPrestamos extends JFrame implements ActionListener {
 
         if (e.getSource() == btnMostrarLibros) {
 
+            //mCoordinador.listarLibros().toString();
+
             areaLibros.setText("");
 
-            for (Libro l : gestionLibros.getLibros()) {
+            for (Libro l : mCoordinador.listarLibros()) {
                 areaLibros.append(l.toString() + "\n\n");
             }
 
         } else if (e.getSource() == btnRegistrarPrestamo) {
 
             String isbn = txtIsbn.getText();
+            String documento = txtIdUsuario.getText();
 
-            for (Libro l : gestionLibros.getLibros()) {
-
-                if (l.getIsbn().equals(isbn)) {
+            for (Libro l : mCoordinador.listarLibros()) {
+                for (Usuario u : mCoordinador.listarUsuario()) {
+                    if (l.getIsbn().equals(isbn)&&u.getDocumento().equals(documento)&&l.getEstado().equals("disponible")) {
 
                     // Simulación (puedes mejorar luego con usuario real)
-                    gestorPrestamos.registrarPrestamo(null, l, true);
+                    gestorPrestamos.registrarPrestamo(u, l, true);
 
                     JOptionPane.showMessageDialog(this, "Préstamo registrado");
                     return;
                 }
+                }
+                
             }
 
             JOptionPane.showMessageDialog(this, "Libro no encontrado");
@@ -157,6 +163,12 @@ public class VentanaPrestamos extends JFrame implements ActionListener {
             } else if (origen.equals("biblio")) {
                 mCoordinador.mostrarBibliotecario();
             }
+        }
+        else if (e.getSource() == btnBuscarLibro) {
+            //this.setVisible(false);
+            Libro wi = mCoordinador.buscarLibro(txtBuscarIsbn.getText());
+            areaLibros.append(wi.toString() + "\n\n");
+            
         }
 
     }

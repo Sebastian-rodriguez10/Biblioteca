@@ -7,6 +7,8 @@ public class Libro {
     private int añoPublicacion;
     private String estado;
 
+    public Libro(){}
+
     public Libro(String isbn, String titulo, String autor, int añoPublicacion, String estado) {
         this.isbn = isbn;
         this.titulo = titulo;

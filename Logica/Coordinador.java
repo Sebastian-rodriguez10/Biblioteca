@@ -1,5 +1,9 @@
 package Logica;
 
+import java.util.ArrayList;
+
+import Entidades.Libro;
+import Entidades.Usuario;
 import GestorDeDatos.GestionLibros;
 import GestorDeDatos.GestorPrestamos;
 import GestorDeDatos.GestorUsuario;
@@ -15,6 +19,7 @@ public class Coordinador {
     private GestorPrestamos mGestorPrestamos;
     private GestorUsuario mGestorUsuario;
     private VentanaPrestamos mVentanaPrestamos;
+    private VentanaListaUsuarios mVentanaListaUsuarios;
 
 
     public void setVentanaRegistro(VentanaRegistro mVentanaRegistro) {
@@ -50,6 +55,9 @@ public class Coordinador {
     }
     public void setVentanaPrestamos(VentanaPrestamos vp) {
     this.mVentanaPrestamos = vp;
+    }
+    public void setVentanaListarUsuario(VentanaListaUsuarios mVentanaListaUsuarios) {
+        this.mVentanaListaUsuarios=mVentanaListaUsuarios;
     }
 
     // ================= VISTAS =================
@@ -94,6 +102,11 @@ public void mostrarPrestamosDesdeBiblio() {
     mBibliotecario.setVisible(false);
 }
 
+    public void mostrarVentanaListaUsuarios() {
+        mVentanaListaUsuarios.setVisible(true);
+        mBibliotecario.setVisible(false);
+    }
+
 
 
     /// motodos para hacer lo que tengas que hacer 
@@ -101,6 +114,22 @@ public void mostrarPrestamosDesdeBiblio() {
     public void visualisarVentanaPincipal() {
         mLogin.setVisible(true);
     }
+
+    ///------------------Bibliotecario -------------------------------------------------------
+    public ArrayList<Libro> listarLibros(){
+        return mGestionLibros.listarLibros();
+    }
+
+    public Libro buscarLibro(String isbn){
+        return mGestionLibros.buscarLibro(isbn);
+    }
+
+    public ArrayList<Usuario> listarUsuario(){
+        return mGestorUsuario.listarUsuarios();
+    }
+
+
+    
 
 
 
