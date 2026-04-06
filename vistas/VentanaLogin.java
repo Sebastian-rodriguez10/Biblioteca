@@ -9,6 +9,8 @@ import javax.swing.border.EmptyBorder;
 import Logica.Coordinador;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -32,8 +34,10 @@ public class VentanaLogin extends JFrame implements ActionListener {
 	private JButton btnSesion;
 	private JButton btnRegistro;
 	private Coordinador mCoordinador;
+	private int acumulador;
 
 	public VentanaLogin() {
+		acumulador = 0;
 		setTitle("Sistema De Biblioteca");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 464, 381);
@@ -87,18 +91,26 @@ public class VentanaLogin extends JFrame implements ActionListener {
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == btnSesion) {
-
+	public void actionPerformed(ActionEvent e) {		
+		if (e.getSource() == btnSesion) {			
+			String documento = txtDocumento.getText();
+			String clave = new String(passwordField.getPassword());
 			String rol = comboBox.getSelectedItem().toString();
-			if (rol.equals("Administrador")) {
+			if (rol.equals("Administrador") && documento.equals("1010") && clave.equals("3231651")) {
 				mCoordinador.mostrarAdministrador();
 
-			} else if (rol.equals("Bibliotecario")) {
+			} else if (rol.equals("Bibliotecario") && documento.equals("2020") && clave.equals("validaciones")) {
 				mCoordinador.mostrarBibliotecario();
 
-			} else if (rol.equals("Lector")) {
+			} else if (rol.equals("Lector") && documento.equals("3030") && clave.equals("carlos")) {
 				mCoordinador.mostrarUsuario();
+
+			} else {
+				acumulador++;
+				if(acumulador == 3) {
+					JOptionPane.showMessageDialog(this, "DATOS INVALIDOS. HA EXCEDIDO SUS 3 INTENTOS. \nINTENTELO MÁS TARDE.");
+					btnSesion.setVisible(false);
+				}
 			}
 
 		} else if (e.getSource() == btnRegistro) {
@@ -106,6 +118,7 @@ public class VentanaLogin extends JFrame implements ActionListener {
 			mCoordinador.mostrarRegistro();
 		}
 	}
+
 
 	public void setCoordinador(Coordinador mCoordinador) {
 		this.mCoordinador = mCoordinador;
