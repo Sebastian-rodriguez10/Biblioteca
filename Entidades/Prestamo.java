@@ -40,6 +40,16 @@ public class Prestamo {
         return estado;
     }
 
+    @Override
+    public String toString() {
+        return "Prestamo [Nombre:" + getUsuario().getNombreCompleto() +"\n"+
+        "Documento: "+getUsuario().getDocumento()+"\n"+
+        "Libro: " + getLibro().getTitulo()+"\n" +
+        "Estado Libro: "+getLibro().getEstado()+"\n"+
+        "ISBN: " +getLibro().getIsbn()+"\n"
+        + "Numero de prestamos: "+getUsuario().getNumPrestamos();
+    }
+
     
 
 }

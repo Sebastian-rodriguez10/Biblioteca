@@ -61,7 +61,6 @@ public class VentanaListaUsuarios extends JFrame implements ActionListener {
         contentPane.add(btnVolver);
     }
 
-    // 🔥 Método para limpiar
     public void limpiar() {
         areaUsuarios.setText("");
     }
@@ -78,7 +77,7 @@ public class VentanaListaUsuarios extends JFrame implements ActionListener {
             areaUsuarios.setText("");
 
             for (Usuario u : miCoordinador.listarUsuario()) {
-
+                
                 areaUsuarios.append("Documento: " + u.getDocumento() + "\n");
                 areaUsuarios.append("Nombre: " + u.getNombreCompleto() + "\n");
                 areaUsuarios.append("Tipo: " + u.getTipoUsuario() + "\n");
