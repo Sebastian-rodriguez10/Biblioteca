@@ -115,11 +115,12 @@ public class GestionLibros {
             if (libro.getIsbn().equals(isbn)) {
 
                 libros.remove(libro);
+                JOptionPane.showMessageDialog(null, "Libro eliminado correctamente.");
                 System.out.println("Libro eliminado correctamente.");
                 return;
             }
         }
-
+        JOptionPane.showMessageDialog(null, "Libro no encontrado.");
         System.out.println("Libro no encontrado.");
     }
 

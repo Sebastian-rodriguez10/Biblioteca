@@ -53,12 +53,12 @@ public class GestorUsuario {
 
         if (listaUsuarios.isEmpty()) {
             System.out.println("No hay usuarios registrados.");
-            for (Usuario usuario : listaUsuarios) {
-                System.out.println("Documento: " + usuario.getDocumento());
-                System.out.println("Nombre: " + usuario.getNombreCompleto());
-                System.out.println("Tipo: " + usuario.getTipoUsuario());
-                System.out.println("-----------------------------");
-            }
+            // for (Usuario usuario : listaUsuarios) {
+            //     System.out.println("Documento: " + usuario.getDocumento());
+            //     System.out.println("Nombre: " + usuario.getNombreCompleto());
+            //     System.out.println("Tipo: " + usuario.getTipoUsuario());
+            //     System.out.println("-----------------------------");
+            // }
         }
         return listaUsuarios;
     }
@@ -66,7 +66,7 @@ public class GestorUsuario {
     // Buscar
     public Usuario buscarUsuario(String documento) {
         for (Usuario usuario : listaUsuarios) {
-            if (usuario.getDocumento() == documento) {
+            if (usuario.getDocumento().equals(documento)) {
                 return usuario;
             }
         }
@@ -76,8 +76,9 @@ public class GestorUsuario {
     // Eliminar
     public String eliminarUsuario(String documento) {
         for (Usuario usuario : listaUsuarios) {
-            if (usuario.getDocumento() == documento) {
+            if (usuario.getDocumento().equals(documento)) {
                 listaUsuarios.remove(usuario);
+                System.out.println("wiii");
                 return "Usuario eliminado correctamente.";
             }
         }

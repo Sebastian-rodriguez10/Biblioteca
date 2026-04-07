@@ -3,6 +3,7 @@ package Logica;
 import java.util.ArrayList;
 
 import Entidades.Libro;
+import Entidades.Prestamo;
 import Entidades.Usuario;
 import GestorDeDatos.GestionLibros;
 import GestorDeDatos.GestorPrestamos;
@@ -136,6 +137,27 @@ public class Coordinador {
 
     public ArrayList<Usuario> listarUsuario() {
         return mGestorUsuario.listarUsuarios();
+    }
+
+    public  Usuario buscarUsuario(String documento){
+        return mGestorUsuario.buscarUsuario(documento);
+    }
+
+    public String eliminarUsuario(String doc) {
+        return mGestorUsuario.eliminarUsuario(doc);
+    }
+
+    public void registrarPrestamo(Usuario u, Libro l, boolean b) {
+        // TODO Auto-generated method stub
+        mGestorPrestamos.registrarPrestamo(u, l, b);;
+    }
+
+    public ArrayList<Prestamo> listaPrestamos() {
+        return mGestorPrestamos.listarPrestamos();
+    }
+
+    public void registrarDevolucion(String documento, String isbn) {
+        mGestorPrestamos.registrarDevolucion(documento, isbn);
     }
 
 }
