@@ -77,15 +77,15 @@ public class VentanaBibliotecario extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        //---------------------lISTAR USUARIO ---------------------------------------------
         if (e.getSource() == btnListaUsuarios) {
             mCoordinador.mostrarVentanaListaUsuariosDesdeBiblio();
-
+            //---------------------ELIMINAR USUARIO ---------------------------------------------
         } else if (e.getSource() == btnEliminarUsuario) {
 
             String doc = JOptionPane.showInputDialog("Documento:");
-            JOptionPane.showMessageDialog(this, gestorUsuario.eliminarUsuario(doc));
-
+            JOptionPane.showMessageDialog(null, mCoordinador.eliminarUsuario(doc));
+            /// ---------AGREGAR LIBRO----------------------------------------------------------
         } else if (e.getSource() == btnAgregarLibro) {
 
             String isbn = JOptionPane.showInputDialog("ISBN:");
@@ -93,26 +93,32 @@ public class VentanaBibliotecario extends JFrame implements ActionListener {
             String autor = JOptionPane.showInputDialog("Autor:");
             int año = 0;
             try {
-               
             // Intentamos convertir el texto a número
-            año = Integer.parseInt(JOptionPane.showInputDialog(("Año")));
-            System.out.println("¡Es un número válido!: " + año);
-            gestionLibros.registrarLibro(isbn, titulo, autor, año, "Disponible");
+                año = Integer.parseInt(JOptionPane.showInputDialog(("Año")));
+                if(isbn.equals("")||titulo.equals("")||autor.equals("")){
+                    JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios");
+                    return;
+                    
+                }
+                System.out.println("¡Es un número válido!: " + año);
+                gestionLibros.registrarLibro(isbn, titulo, autor, año, "diponible");
         } catch (NumberFormatException e1) {
-             if (isbn.isEmpty() || titulo.isEmpty() || autor.isEmpty()) {
+            if (isbn.isEmpty() && titulo.isEmpty() && autor.isEmpty()) {
                     JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios");
                 }else{
+                    JOptionPane.showMessageDialog(null, "Error: Has introducido una letra o un formato no válids");
                     System.out.println("Error: Has introducido una letra o un formato no válido.");
                 }
             // Si falla la conversión, entra aquí
             
         }
-            
-
-
+            //---------------------ELIMINAR LIBRO ---------------------------------------------
         } else if (e.getSource() == btnEliminarLibro) {
 
             String isbn = JOptionPane.showInputDialog("ISBN:");
+            if(mCoordinador.buscarLibro(isbn)!=null){
+                
+            }
             gestionLibros.eliminarLibro(isbn);
         } else if (e.getSource() == btnVolver) {
             mCoordinador.mostrarLogin();
@@ -120,7 +126,6 @@ public class VentanaBibliotecario extends JFrame implements ActionListener {
         } else if (e.getSource() == btnPrestamos) {
             mCoordinador.mostrarPrestamosDesdeBiblio();
         }
-
     }
 
     public void setCoordinador(Coordinador mCoordinador) {
