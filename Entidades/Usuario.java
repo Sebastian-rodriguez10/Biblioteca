@@ -5,15 +5,17 @@ public class Usuario {
     private String nombreCompleto;
     private String tipoUsuario;
     private int numPrestamos;
+    private String contraseña;
     private int limPrestamos;
 
     public Usuario(){
     }
 
-    public Usuario(String documento, String nombreCompleto, String tipoUsuario){
+    public Usuario(String documento, String nombreCompleto, String tipoUsuario, String contraseña){
         this.documento=documento;
         this.nombreCompleto=nombreCompleto;
         this.tipoUsuario= tipoUsuario;
+        this.contraseña= contraseña;
         this.numPrestamos = 0;
         this.limPrestamos = 3;
     }
@@ -27,9 +29,15 @@ public class Usuario {
     public void setTipoUsuario(String tipoUsuario) {
         this.tipoUsuario = tipoUsuario;
     }
+    public void setContraseña(String contraseña) {
+        this.contraseña = contraseña;
+    }
     //get
     public String getDocumento() {
         return documento;
+    }
+    public String getContraseña() {
+        return contraseña;
     }
     public String getNombreCompleto() {
         return nombreCompleto;

@@ -6,9 +6,12 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import Entidades.Usuario;
 import Logica.Coordinador;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -31,6 +34,7 @@ public class VentanaRegistro extends JFrame implements ActionListener {
 	private JButton btnRegistrar;
 	private JButton btnCancelar;
 	private Coordinador mCoordinador;
+	private Usuario usuario;
 
 	public VentanaRegistro() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -53,7 +57,7 @@ public class VentanaRegistro extends JFrame implements ActionListener {
 
 		lblNombre = new JLabel("Nombre: ");
 		lblNombre.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblNombre.setBounds(117, 98, 65, 14);
+		lblNombre.setBounds(117, 98, 70, 14);
 		contentPane.add(lblNombre);
 
 		textNombre = new JTextField();
@@ -63,7 +67,7 @@ public class VentanaRegistro extends JFrame implements ActionListener {
 
 		lblDocumento = new JLabel("I.D.: ");
 		lblDocumento.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblDocumento.setBounds(148, 143, 34, 14);
+		lblDocumento.setBounds(148, 143, 40, 14);
 		contentPane.add(lblDocumento);
 
 		textDocumento = new JTextField();
@@ -73,7 +77,7 @@ public class VentanaRegistro extends JFrame implements ActionListener {
 
 		lblContraseña = new JLabel("Contraseña: ");
 		lblContraseña.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblContraseña.setBounds(93, 186, 89, 14);
+		lblContraseña.setBounds(93, 186, 100, 14);
 		contentPane.add(lblContraseña);
 
 		passwordField = new JPasswordField();
@@ -94,6 +98,15 @@ public class VentanaRegistro extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnRegistrar) {
+			usuario = new Usuario();
+			usuario.setDocumento(textDocumento.getText());
+			usuario.setNombreCompleto(textNombre.getText());
+			usuario.setTipoUsuario("lector");
+			usuario.setContraseña(new String(passwordField.getPassword()));
+
+			String texto = mCoordinador.registrarUsuario(usuario);
+			JOptionPane.showMessageDialog(null, texto);
+
 			mCoordinador.mostrarUsuario();
 			this.setVisible(false);
 		} else if (e.getSource() == btnCancelar) {

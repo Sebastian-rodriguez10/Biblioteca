@@ -138,4 +138,13 @@ public class Coordinador {
         return mGestorUsuario.listarUsuarios();
     }
 
+    public String registrarUsuario(Usuario user) {
+        String texto = mGestorUsuario.registrarUsuario(user);
+        return texto;
+    }
+
+    public Usuario validUsuario(String id){
+        return mGestorUsuario.buscarUsuario(id);
+    }
+
 }

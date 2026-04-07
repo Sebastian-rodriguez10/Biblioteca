@@ -6,9 +6,13 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import Config.Config;
+import Entidades.Usuario;
 import Logica.Coordinador;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -28,14 +32,16 @@ public class VentanaLogin extends JFrame implements ActionListener {
 	private JPasswordField passwordField;
 	private JLabel lblNewLabel;
 	private JComboBox comboBox;
-	private JLabel lblContraseña;
+	private JLabel lblContraseña, lblUsuario;
 	private JButton btnSesion;
 	private JButton btnRegistro;
 	private Coordinador mCoordinador;
+	private Config config = new Config();
+	private int intentos = 0;
 
 	public VentanaLogin() {
 		setTitle("Sistema De Biblioteca");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 464, 381);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -61,11 +67,14 @@ public class VentanaLogin extends JFrame implements ActionListener {
 
 		txtDocumento = new JTextField();
 		txtDocumento.setForeground(new Color(192, 192, 192));
-		txtDocumento.setText("Escriba aquí su usuario");
-		txtDocumento.setBounds(137, 127, 160, 20);
+		txtDocumento.setBounds(137, 138, 160, 20);
 		contentPane.add(txtDocumento);
 		txtDocumento.setColumns(50);
 
+		lblUsuario = new JLabel("Usuario");
+		lblUsuario.setBounds(137, 120, 60, 14);
+		contentPane.add(lblUsuario);
+			 
 		passwordField = new JPasswordField();
 		passwordField.setToolTipText("");
 		passwordField.setBounds(137, 188, 160, 20);
@@ -91,14 +100,56 @@ public class VentanaLogin extends JFrame implements ActionListener {
 		if (e.getSource() == btnSesion) {
 
 			String rol = comboBox.getSelectedItem().toString();
-			if (rol.equals("Administrador")) {
-				mCoordinador.mostrarAdministrador();
+			String contraseña = new String(passwordField.getPassword());
+			String id = txtDocumento.getText();
 
-			} else if (rol.equals("Bibliotecario")) {
-				mCoordinador.mostrarBibliotecario();
+			Usuario user = mCoordinador.validUsuario(id);
 
-			} else if (rol.equals("Lector")) {
-				mCoordinador.mostrarUsuario();
+			if (user == null || !user.getContraseña().equals(contraseña)) {
+
+				intentos++;
+
+				if (intentos >= config.getMaxLogin()) {
+					JOptionPane.showMessageDialog(null, "Se acabaron los intentos");
+					btnSesion.setEnabled(false);
+					btnRegistro.setEnabled(false);
+
+				} else {
+					JOptionPane.showMessageDialog(null,
+							"Usuario o contraseña incorrecta. Intento " + intentos);
+				}
+
+				return; 
+			}
+
+			intentos = 0;
+
+			if (rol.equalsIgnoreCase("Lector")) {
+
+				if (user.getTipoUsuario().equalsIgnoreCase("lector")) {
+					mCoordinador.mostrarUsuario();
+				} else {
+					JOptionPane.showMessageDialog(null, "No tienes acceso como lector");
+				}
+
+			} else if (rol.equalsIgnoreCase("Administrador")) {
+
+				if (user.getTipoUsuario().equalsIgnoreCase("administrador")) {
+					mCoordinador.mostrarAdministrador();
+				} else {
+					JOptionPane.showMessageDialog(null, "No tienes acceso como administrador");
+				}
+
+			} else if (rol.equalsIgnoreCase("Bibliotecario")) {
+
+				if (user.getTipoUsuario().equalsIgnoreCase("bibliotecario")) {
+					mCoordinador.mostrarBibliotecario();
+				} else {
+					JOptionPane.showMessageDialog(null, "No tienes acceso como bibliotecario");
+				}
+
+			} else {
+				JOptionPane.showMessageDialog(null, "Rol inválido");
 			}
 
 		} else if (e.getSource() == btnRegistro) {

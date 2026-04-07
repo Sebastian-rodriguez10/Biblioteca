@@ -12,9 +12,9 @@ public class GestorUsuario {
     private Coordinador mCoordinador;
 
     public GestorUsuario() {
-        listaUsuarios.add(new Usuario("1010", "Carlos Perez", "administrador"));
-        listaUsuarios.add(new Usuario("2020", "Ana Gomez", "bibliotecario"));
-        listaUsuarios.add(new Usuario("3030", "Juan Roa", "usuario"));
+        listaUsuarios.add(new Usuario("1010", "Carlos Perez", "administrador", "admin123"));
+        listaUsuarios.add(new Usuario("2020", "Ana Gomez", "bibliotecario", "biblio123"));
+        listaUsuarios.add(new Usuario("3030", "Juan Roa", "lector", "roa123"));
     }
 
     // get
@@ -25,9 +25,9 @@ public class GestorUsuario {
     // Método para registrar usuario
     public String registrarUsuario(Usuario usuario) {
         // Que se ingresen todos los campos
-        if (usuario.getDocumento() == null || usuario.getNombreCompleto() == null
-                || usuario.getNombreCompleto().isEmpty() || usuario.getTipoUsuario() == null
-                || usuario.getTipoUsuario().isEmpty()) {
+        if (usuario.getDocumento().isEmpty() || usuario.getNombreCompleto().isEmpty()
+                || usuario.getNombreCompleto().isEmpty() ||
+                usuario.getTipoUsuario().isEmpty()) {
             return "Todos los campos son obligatorios";
         }
         // Verifica que no haya un documento repetido
@@ -66,7 +66,7 @@ public class GestorUsuario {
     // Buscar
     public Usuario buscarUsuario(String documento) {
         for (Usuario usuario : listaUsuarios) {
-            if (usuario.getDocumento() == documento) {
+            if (usuario.getDocumento().equals(documento)) {
                 return usuario;
             }
         }
