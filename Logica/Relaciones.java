@@ -9,7 +9,7 @@ import vistas.*;
 public class Relaciones {
 
     public Relaciones(){
-        String wi = "Dana";
+    
     VentanaRegistro mVentanaRegistro = new VentanaRegistro();
     VentanaLogin mLogin = new VentanaLogin();
     GestionLibros mGestionLibros = new GestionLibros();
@@ -18,7 +18,7 @@ public class Relaciones {
     Coordinador mCoordinador = new Coordinador();
     VentanaAdministrador mVentanaAdministrador = new VentanaAdministrador(mGestorUsuario,mGestionLibros);
     VentanaBibliotecario mBibliotecario = new VentanaBibliotecario(mGestorUsuario,mGestionLibros);
-    VentanaUsuario mVentanaUsuario = new VentanaUsuario(wi, mGestionLibros);
+    VentanaUsuario mVentanaUsuario = new VentanaUsuario(mGestionLibros);
     VentanaPrestamos mVentanaPrestamos = new VentanaPrestamos();
     VentanaListaUsuarios mVentanaListaUsuarios = new VentanaListaUsuarios();
 

@@ -47,6 +47,7 @@ public class GestorUsuario {
             return "Usuario registrado correctamente.";
         }
     }
+    
 
     // mostrar la lista
     public ArrayList<Usuario> listarUsuarios() {
@@ -87,5 +88,6 @@ public class GestorUsuario {
     public void setCoordinador(Coordinador mCoordinador) {
         this.mCoordinador = mCoordinador;
     }
+
 
 }

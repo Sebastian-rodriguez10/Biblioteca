@@ -98,24 +98,31 @@ public class VentanaRegistro extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnRegistrar) {
-			usuario = new Usuario();
-			usuario.setDocumento(textDocumento.getText());
-			usuario.setNombreCompleto(textNombre.getText());
-			usuario.setTipoUsuario("lector");
-			usuario.setContraseña(new String(passwordField.getPassword()));
+			
+			String contra = new String(passwordField.getPassword());
+			String documento = textDocumento.getText();
+			String rol = "Lector";
+			String nombre = textNombre.getText();
+			Usuario user = new Usuario(documento, nombre, rol, contra);
 
-			String texto = mCoordinador.registrarUsuario(usuario);
+			String texto = mCoordinador.registrarUsuario(user);
 			JOptionPane.showMessageDialog(null, texto);
 
 			mCoordinador.mostrarUsuario();
 			this.setVisible(false);
+			limpiar();
 		} else if (e.getSource() == btnCancelar) {
+			limpiar();
 			mCoordinador.mostrarLogin();
 			this.setVisible(false);
 		}
 
 	}
-
+	public void limpiar(){
+		textDocumento.setText("");
+		textNombre.setText("");
+		passwordField.setText("");
+	}
 	public void setCoordinador(Coordinador mCoordinador) {
 		this.mCoordinador = mCoordinador;
 	}

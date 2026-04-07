@@ -104,29 +104,31 @@ public class VentanaLogin extends JFrame implements ActionListener {
 			String id = txtDocumento.getText();
 
 			Usuario user = mCoordinador.validUsuario(id);
-
+			//validacion para todos
 			if (user == null || !user.getContraseña().equals(contraseña)) {
 
 				intentos++;
-
+				//si llega a los 3 intentos desabilita los botones
 				if (intentos >= config.getMaxLogin()) {
 					JOptionPane.showMessageDialog(null, "Se acabaron los intentos");
 					btnSesion.setEnabled(false);
 					btnRegistro.setEnabled(false);
-
+				//mostrarle al usuario en que intento va
 				} else {
 					JOptionPane.showMessageDialog(null,
 							"Usuario o contraseña incorrecta. Intento " + intentos);
 				}
-
+				//cerrar el proceso
 				return; 
 			}
 
 			intentos = 0;
 
+			//Manejo de roles
 			if (rol.equalsIgnoreCase("Lector")) {
 
 				if (user.getTipoUsuario().equalsIgnoreCase("lector")) {
+					limpiar();
 					mCoordinador.mostrarUsuario();
 				} else {
 					JOptionPane.showMessageDialog(null, "No tienes acceso como lector");
@@ -135,6 +137,7 @@ public class VentanaLogin extends JFrame implements ActionListener {
 			} else if (rol.equalsIgnoreCase("Administrador")) {
 
 				if (user.getTipoUsuario().equalsIgnoreCase("administrador")) {
+					limpiar();
 					mCoordinador.mostrarAdministrador();
 				} else {
 					JOptionPane.showMessageDialog(null, "No tienes acceso como administrador");
@@ -143,6 +146,7 @@ public class VentanaLogin extends JFrame implements ActionListener {
 			} else if (rol.equalsIgnoreCase("Bibliotecario")) {
 
 				if (user.getTipoUsuario().equalsIgnoreCase("bibliotecario")) {
+					limpiar();
 					mCoordinador.mostrarBibliotecario();
 				} else {
 					JOptionPane.showMessageDialog(null, "No tienes acceso como bibliotecario");
@@ -153,9 +157,14 @@ public class VentanaLogin extends JFrame implements ActionListener {
 			}
 
 		} else if (e.getSource() == btnRegistro) {
-
+			limpiar();
 			mCoordinador.mostrarRegistro();
 		}
+	}
+
+	public void limpiar(){
+		passwordField.setText("");
+		txtDocumento.setText("");
 	}
 
 	public void setCoordinador(Coordinador mCoordinador) {

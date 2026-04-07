@@ -6,6 +6,7 @@ import javax.swing.border.EmptyBorder;
 import GestorDeDatos.GestionLibros;
 import Logica.Coordinador;
 import Entidades.Libro;
+import Entidades.Usuario;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -22,8 +23,9 @@ public class VentanaUsuario extends JFrame implements ActionListener {
 
     private GestionLibros gestionLibros;
     private Coordinador mCoordinador;
+    private Usuario usuario;
 
-    public VentanaUsuario(String nombre, GestionLibros gestionLibros) {
+    public VentanaUsuario(GestionLibros gestionLibros) {
         this.gestionLibros = gestionLibros;
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 500, 400);
@@ -33,12 +35,12 @@ public class VentanaUsuario extends JFrame implements ActionListener {
         contentPane.setLayout(null);
         setLocationRelativeTo(null);
 
-        iniciarComponentes(nombre);
+        iniciarComponentes();
     }
 
-    private void iniciarComponentes(String nombre) {
+    private void iniciarComponentes() {
 
-        lblBienvenida = new JLabel("Bienvenido " + nombre);
+        lblBienvenida = new JLabel("Bienvenido ");
         lblBienvenida.setBounds(150, 10, 250, 25);
         contentPane.add(lblBienvenida);
 
