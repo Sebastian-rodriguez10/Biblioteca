@@ -44,7 +44,7 @@ public class VentanaAdministrador extends JFrame implements ActionListener {
 
     private void iniciarComponentes() {
 
-        btnAgregarUsuario = new JButton("Agregar Usuario");
+        btnAgregarUsuario = new JButton("Agregar Bibliotecario");
         btnAgregarUsuario.setBounds(70, 20, 300, 30);
         btnAgregarUsuario.addActionListener(this);
         contentPane.add(btnAgregarUsuario);
@@ -87,7 +87,7 @@ public class VentanaAdministrador extends JFrame implements ActionListener {
 
             String doc = JOptionPane.showInputDialog("Documento:");
             String nombre = JOptionPane.showInputDialog("Nombre:");
-            String tipo = JOptionPane.showInputDialog("Tipo:");
+            String tipo = "Bibliotecario";
             String con = JOptionPane.showInputDialog("Contresaña: ");
             Usuario u = new Usuario(doc, nombre, tipo, con);
             JOptionPane.showMessageDialog(this, gestorUsuario.registrarUsuario(u));
